@@ -6,7 +6,7 @@ import {
   ArrowBackIosOutlined,
 } from "@material-ui/icons";
 
-export default function List({ list }) {
+const List({ list }) {
   console.log(list);
   const [isMoved, setIsMoved] = useState(false);
   const [slideNumber, setSlideNumber] = useState(0);

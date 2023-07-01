@@ -1,7 +1,7 @@
 import "./featured.scss";
 import { PlayArrow, InfoOutlined } from "@material-ui/icons";
 
-export default function Featured({type}) {
+const Featured({type}) {
   return (
     <div className="featured">
         {

@@ -3,7 +3,7 @@ import {useNavigate } from "react-router-dom";
 import "./login.scss";
 import axios from "axios";
 
-export default function Login() {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();

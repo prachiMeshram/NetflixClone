@@ -8,7 +8,7 @@ import {
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function ListItem({ index, item }) {
+const ListItem({ index, item }) {
   const [isHovered, setIsHovered] = useState(false);
 
   const [movie, setMovie] = useState(null);

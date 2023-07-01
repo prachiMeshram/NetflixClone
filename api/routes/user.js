@@ -1,3 +1,5 @@
+// module that defines various routes related to user management in an Express.js application
+
 const router = require("express").Router();
 const User = require("../models/User");
 const CryptoJS = require("crypto-js");
@@ -44,7 +46,6 @@ router.post("/update", verify, async (req, res) => {
 // get
 router.get("/get", verify, async (req, res) => {
   try {
-
     const user = await User.findOne({ _id: req.decoded.id });
     if (!user) {
       return res.status(404).send("user not found");
@@ -67,18 +68,20 @@ router.get("/getall", verify, async (req, res) => {
     if (!req.decoded.isAdmin) {
       return res.status(401).send("user is not admin");
     }
-    const users = await User.find();
+    const users = await User.find().sort({ createdAt: -1 });
+
     return res.status(200).json({ users });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 // delete
+// (consider adding additional checks and confirmation steps to prevent accidental or unauthorized account deletion.)
 router.post("/delete", verify, async (req, res) => {
   try {
     const user = await User.deleteOne({ _id: req.decoded.id });
     console.log(user);
-    return res.status(404).send("user deleted");
+    return res.status(204).send("user deleted");
   } catch (err) {
     res.status(500).json(err);
   }
@@ -123,31 +126,67 @@ router.get("/stats", async (req, res) => {
   }
 });
 
-router.get("/_stats", verify, async (req, res) => {
-
-  const users = await User.find();
+router.get("/userStats", verify, async (req, res) => {
+  console.log("here");
   if (!req.decoded.isAdmin) {
     res.status(500).send("user is admin");
   }
-  const data = {
-    1: 0,
-    2: 0,
-    3: 0,
-    4: 0,
-    5: 0,
-    6: 0,
-    7: 0,
-    8: 0,
-    9: 0,
-    10: 0,
-    11: 0,
-    12: 0,
-  };
+  const users = await User.find();
+  const data = [
+    {
+      name: "Jan",
+      "Active User": 0,
+    },
+    {
+      name: "Feb",
+      "Active User": 0,
+    },
+    {
+      name: "Mar",
+      "Active User": 0,
+    },
+    {
+      name: "Apr",
+      "Active User": 0,
+    },
+    {
+      name: "May",
+      "Active User": 0,
+    },
+    {
+      name: "Jun",
+      "Active User": 0,
+    },
+    {
+      name: "Jul",
+      "Active User": 0,
+    },
+    {
+      name: "Agu",
+      "Active User": 0,
+    },
+    {
+      name: "Sep",
+      "Active User": 0,
+    },
+    {
+      name: "Oct",
+      "Active User": 0,
+    },
+    {
+      name: "Nov",
+      "Active User": 0,
+    },
+    {
+      name: "Dec",
+      "Active User": 0,
+    },
+  ];
 
   let count = 0;
 
   users.map((user) => {
-    data[user.createdAt.getMonth() + 1]++;
+    data[user.createdAt.getMonth()]["Active User"]++;
   });
 
   return res.status(200).send({ data });

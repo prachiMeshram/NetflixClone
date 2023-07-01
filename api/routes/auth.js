@@ -51,6 +51,7 @@ router.post("/login", async (req, res) => {
     );
 
     return res.status(200).json({
+      // to make sure password is not going
       username: user.username,
       id: user._id,
       isAdmin: user.isAdmin,
