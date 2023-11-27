@@ -9,6 +9,7 @@ import NewUser from "./pages/newUser/NewUsers";
 import ProductList from "./pages/productList/ProductList";
 import Product from "./pages/product/Product";
 import NewProduct from "./pages/newProduct/NewProduct";
+import Login from "./pages/login/Login"
 
 const App = () => {
   return (
@@ -38,6 +39,9 @@ const App = () => {
           </Route>
           <Route path="/newproduct">
             <NewProduct />
+          </Route>
+          <Route path="/login">
+            <Login />
           </Route>
         </Switch>
       </div>

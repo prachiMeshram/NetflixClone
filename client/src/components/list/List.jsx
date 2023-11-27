@@ -6,7 +6,7 @@ import {
   ArrowBackIosOutlined,
 } from "@material-ui/icons";
 
-const List({ list }) {
+function List({ list, token }) {
   console.log(list);
   const [isMoved, setIsMoved] = useState(false);
   const [slideNumber, setSlideNumber] = useState(0);
@@ -27,7 +27,6 @@ const List({ list }) {
   };
 
   return (
-  
     <div className="list">
       <span className="listTitle">{list.title}</span>
       <div className="wrapper">
@@ -38,7 +37,7 @@ const List({ list }) {
         />
         <div className="container" ref={listRef}>
           {list.content.map((listItem, i) => (
-            <ListItem key={i} index={i} item={listItem}/>
+            <ListItem key={i} index={i} item={listItem} token={token} />
           ))}
         </div>
         <ArrowForwardIosOutlined
@@ -49,3 +48,5 @@ const List({ list }) {
     </div>
   );
 }
+
+export default List;

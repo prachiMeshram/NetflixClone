@@ -8,9 +8,8 @@ import {
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const ListItem({ index, item }) {
+export default function ListItem({ index, item, token }) {
   const [isHovered, setIsHovered] = useState(false);
-
   const [movie, setMovie] = useState(null);
 
   useEffect(() => {
@@ -20,8 +19,7 @@ const ListItem({ index, item }) {
           `http://localhost:8000/api/movie/find/${item}`,
           {
             headers: {
-              authorization:
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OGJmYzc1MWY4ZGJhZTQ2OTAzM2RlYiIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2ODY4OTU3NjUsImV4cCI6MTY4NzMyNzc2NX0.SY05UOfwZsiD61Tq-a0SqcaHtAJmAByLuVEzzYSvg0I",
+              authorization: token,
             },
           }
         );
@@ -62,9 +60,6 @@ const ListItem({ index, item }) {
               <div className="desc">{movie.desc}</div>
               <div className="genre">{movie.genre}</div>
             </div>
-
-
-
           </>
         )}
       </div>

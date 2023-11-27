@@ -18,3 +18,5 @@ const Watch = () => {
     </div>
   );
 }
+
+export default Watch;

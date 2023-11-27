@@ -5,10 +5,13 @@ import "./home.css";
 import WidgetSm from "../../components/widgetSm/widgetSm";
 import WidgetLg from "../../components/widgetLg/widgetLg";
 import { useEffect, useState } from "react";
+import {useLocation} from "react-router-dom";
 import axios from "axios";
 
 const Home = () => {
   const [userData, setUserData] = useState([]);
+  const location = useLocation();
+  const token = location.state?.token;
 
   const monthsArray = [
     "January",
@@ -30,7 +33,7 @@ const Home = () => {
       const res = await axios.get("http://localhost:8000/api/user/userStats", {
         headers: {
           authorization:
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ODQwYWM1ZGE5ZGYyNzFjOGRjZjQ4NyIsImlzQWRtaW4iOnRydWUsImlhdCI6MTY4ODIwMjkwMywiZXhwIjoxNjg4NjM0OTAzfQ.XdFWULUTKSB8CVJe1a_hkotgNS5uWbJk4bwUpmcBmtQ",
+            token,
         },
       });
 

@@ -38,7 +38,7 @@ router.post("/delete/:id", verify, async (req, res) => {
 // GET
 router.get("/getlists", async (req, res) => {
   try {
-    console.log("i am here");
+    console.log("i am here 1");
     if (req.body.type) {
       if (req.body.genre) {
         // get lists of given type & genre
@@ -61,15 +61,17 @@ router.get("/getlists", async (req, res) => {
       }
     } else {
       // get random lists
-    
       const list = await List.find();
       console.log(list.length);
-
+      
       const ans = getRandomList(list, list.length);
+      console.log("i should be here")
+      console.log(ans)
 
       return res.status(201).json(ans);
     }
   } catch (err) {
+    console.log("am i here")
     res.status(500).json(err);
   }
 });

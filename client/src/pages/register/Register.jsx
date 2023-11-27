@@ -6,7 +6,7 @@ import "./register.scss";
 
 const Register = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("1234");
   const navigate = useNavigate();
 
   const emailRef = useRef();
@@ -22,9 +22,8 @@ const Register = () => {
     const res = await axios.post("http://localhost:8000/api/auth/register", {
       data: { email, password, username: "titu" }, // ERROR
     });
-    console.log(res);
 
-    navigate("/", {token: res.data.accessToken});
+    navigate("/home", {state: {token: res.data.accessToken}});
   };
 
   return (
@@ -64,3 +63,5 @@ const Register = () => {
     </div>
   );
 }
+
+export default Register;

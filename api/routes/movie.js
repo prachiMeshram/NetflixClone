@@ -8,11 +8,36 @@ router.post("/addmovie", verify, async (req, res) => {
     if (!req.decoded.isAdmin) {
       return res.status(401).send("user is not admin");
     }
+
+  //   const MovieSchema = new mongoose.Schema(
+  //     {
+  //         title: { type: String, required: true, unique: true},
+  //         desc: { type: String },
+  //         img: { type: String },
+  //         imgTitle: { type: String },
+  //         imgSm: { type: String },
+  //         trailer: { type: String },
+  //         video: { type: String },
+  //         year: { type: String },
+  //         limit: { type: Number },
+  //         genre: { type: String },
+  //         isSeries: { type: Boolean, default: false},
+          
+  //     }, 
+  //     {timestamps: true}
+  // );
+
     const newMovie = new Movie({
       title: req.body.title,
       desc: req.body.desc,
-      genre: req.body.genre,
       img: req.body.img,
+      imgTitle: req.body.imgTitle,
+      imgSm: req.body.imgSm,
+      trailer: req.body.trail,
+      video: req.body.vid,
+      year: req.body.year,
+      limit: req.body.limit,
+      genre: req.body.genre,
       isSeries: req.body.isSeries
     });
     console.log(newMovie);
@@ -88,7 +113,7 @@ router.post("/update/:id", verify, async (req, res) => {
 })
 // GET
 router.get ("/find/:id", verify, async (req, res) => {
-  
+  console.log("here we are")
   try {
     const movie = await Movie.findOne({_id: req.params.id});
 

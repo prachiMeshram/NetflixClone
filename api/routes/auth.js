@@ -5,6 +5,7 @@ const Cryptojs = require("crypto-js");
 
 // REGISTER
 router.post("/register", async (req, res) => {
+  console.log(req.body.data);
   const newUser = new User({
     username: req.body.data.username,
     email: req.body.data.email,
@@ -13,16 +14,20 @@ router.post("/register", async (req, res) => {
       process.env.SECRET_KEY
     ).toString(),
   });
-  console.log(newUser);
+  console.log(newUser, "Hi");
   try {
+    console.log(newUser, "New user here")
     const user = await newUser.save();
+    console.log(user, "this user");
     const accessToken = jwt.sign(
       { id: user._id, isAdmin: user.isAdmin },
       process.env.SECRET_KEY,
       { expiresIn: "5d" }
     );
+    console.log("hawidgy");
     res.status(201).json({ user, accessToken });
   } catch (err) {
+    console.log(err)
     res.status(500).json(err);
   }
 });

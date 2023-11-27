@@ -6,35 +6,37 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import "./home.scss";
 
-const Home = ({type, genre}) => {
+// jbgrj
+const Home = ({ type, genre }) => {
   const [lists, setLists] = useState([]);
-  const {token} = useLocation();
+  const {state} = useLocation();
+  const { token } = state;
 
   useEffect(() => {
     const getLists = async () => {
+      console.log(token, "here");
+
       try {
         const res = await axios.get("http://localhost:8000/api/list/getlists", {
           headers: {
             authorization: token,
           },
         });
-        // console.log(res);
         setLists(res.data);
+        console.log(res);
       } catch (err) {
         console.log(err);
       }
     };
 
     getLists();
-  }, [type, genre]);
+  }, []);
   return (
     <div className="home">
       <Navbar />
-      <Featured type = {type} />
+      <Featured type={type} />
       {!!lists &&
-        lists.map((list, id) => (
-          <List list={list} key={id}/>
-        ))}
+        lists.map((list, id) => <List list={list} key={id} token={token} />)}
     </div>
   );
 };
